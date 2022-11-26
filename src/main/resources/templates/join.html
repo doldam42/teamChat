@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko-kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/style/style.css" />
+  <link rel="stylesheet" href="/style/signin.css" />
+  <title>Document</title>
+</head>
+<body>
+<div class="main-container">
+  <section class="title-container">
+    <img src="/img/team.png" alt="" />
+    <h1>팀프리</h1>
+  </section>
+  <hr />
+  <form
+          method="post"
+          class="signin-container"
+          onsubmit="return isSame();"
+          id="signin-form"
+          th:action="@{/auth/join}"
+  >
+    <div class="name-container">
+      <label for="nick">이름</label>
+      <input type="text" name="nick" id="nick" required />
+    </div>
+    <div class="id-container">
+      <label for="email">이메일</label>
+      <input type="email" name="email" id="email" required />
+    </div>
+    <div class="pwd-container">
+      <label for="password">비밀번호</label>
+      <input type="password" name="password" id="password" required />
+    </div>
+    <div class="pwd-confirm-container">
+      <label for="password-confirm">비밀번호 확인</label>
+      <input
+              type="password"
+              name="password-confirm"
+              id="password-confirm"
+              required
+      />
+    </div>
+    <div class="job-container">
+      <label for="desiredJob">희망 직무</label>
+      <input type="text" name="desiredJob" id="desiredJob" required />
+    </div>
+    <button type="submit">가입하기</button>
+  </form>
+</div>
+<script>
+  document.querySelectorAll("input").forEach((input) => {
+    input.addEventListener("invalid", () => {
+      // 검증 후 폼 요소에 was-validated 클래스로 표시해 둔다
+      document.forms[0].classList.add("was-validated");
+    });
+  });
+  function isSame() {
+    var form = new FormData(document.getElementById("signin-form"));
+    if (form.get("password") !== form.get("password-confirm")) {
+      alert("비밀번호가 다릅니다!");
+      document.querySelectorAll("input").forEach((input) => {
+        input.value = "";
+      });
+      return false;
+    }
+    return true;
+  }
+</script>
+</body>
+</html>

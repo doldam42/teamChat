@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko-kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style/style.css" />
+    <link rel="stylesheet" href="/style/login.css" />
+    <title>팀 프리</title>
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username or password
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<div class="main-container">
+    <section class="title-container">
+        <img src="/img/team.png" alt="이미지 오류" />
+        <h1>팀프리</h1>
+    </section>
+    <section class="login-container">
+        <form class="login-form" name="loginForm" th:action="@{/auth/loginAction}" method="post">
+            <input type="text" name="username" required/>
+            <input type="password" name="password" required/>
+            <button type="submit">로그인</button>
+        </form>
+        <section class="sns-login">
+            <button class="kakao" onclick="location.href='/auth/kakao'">카카오톡</button>
+        </section>
+    </section>
+    <section class="signin-container">
+        <p>아이디가 없으신가요?</p>
+        <hr />
+        <button onclick="location.href='/auth/join'">Sign in</button>
+    </section>
+</div>
+</body>
+</html>
