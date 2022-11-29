@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko-kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style/room.css" />
+    <script src="https://kit.fontawesome.com/f4a949efe8.js" crossorigin="anonymous"></script>
+    <title>채팅방</title>
+</head>
+<body>
+<div class="wrap">
+    <template id="chatBubble">
+        <div class="chat">
+            <div class="icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="textbox"></div>
+        </div>
+    </template>
+</div>
+<form action="" id="chat-form">
+    <input type="text" name="content" id="send" class="content"/>
+    <button onclick="sendChat()">확인</button>
+</form>
+<script>
+      const socket = new WebSocket("ws://localhost:8080/ws/chat");
+      /*<![CDATA[*/
+      const roomId = "[[${roomId}]]";
+      const sender = "[[${sender}]]";
+      /*]]>*/
+
+      socket.onopen = () => {
+        console.log("open server!");
+          let chat = {
+              "type": "enter",
+              "roomId": roomId,
+              "message": "",
+              "sender": sender,
+          }
+          socket.send(JSON.stringify(chat));
+      };
+
+      socket.onerror = (e) => {
+        console.log(e);
+      };
+
+      socket.onmessage = (e) => {
+        console.log(e.data);
+        addChat(JSON.parse(e.data));
+      };
+
+      /**
+       * 채팅방에 채팅을 추가하는 메서드
+       * @param chat JSON {"type", "roomId", "sender", "message"}
+       */
+      const addChat = (chat) => {
+        let copiedNode = document.importNode(
+          document.querySelector("#chatBubble").content,
+          true
+        );
+        copiedNode.querySelector(".chat").classList.add(
+            (chat["sender"] !== sender) ? "ch1" : "ch2"
+        );
+        copiedNode.querySelector(".textbox").textContent = chat["message"];
+
+        const wrap = document.querySelector(".wrap");
+        wrap.appendChild(copiedNode);
+        wrap.scrollTop = wrap.scrollHeight;
+      };
+
+      const sendChat = () => {
+        let content = document.querySelector(".content");
+        let chat = {
+          "type": "talk",
+          "roomId": roomId,
+          "message": content.value,
+          "sender": sender,
+        }
+        socket.send(JSON.stringify(chat));
+        content.value = ""
+      }
+
+      /**
+       * 서버에 저장된 chat 들을 받아와 보여주는 함수
+       * response: Array<Chat>
+       * @returns {Promise<void>}
+       */
+      window.onload = async () => {
+        const response = await fetch("http://localhost:8080/room/"+roomId + "/me/chat", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.status >= 200 && response.status <=299) {
+            let chats = await response.json()
+            for (let chat of chats) {
+                addChat(chat)
+            }
+        } else {
+            console.log(response.status, response.statusText);
+        }
+      };
+      document
+          .querySelector("#chat-form")
+          .addEventListener("submit", (evt) => {
+              evt.preventDefault();
+          });
+
+</script>
+</body>
+</html>

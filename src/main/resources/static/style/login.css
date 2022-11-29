@@ -1,0 +1,80 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 타이틀 */
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+}
+.title-container > img {
+  height: 12rem;
+  margin: 1.5rem;
+}
+.title-container > h1 {
+  margin: 1.5rem;
+}
+
+/* 로그인 섹션 */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 30rem;
+}
+.login-form {
+  flex-basis: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.login-form > input {
+  width: 27.6rem;
+  height: 3.8rem;
+  border: thin solid black;
+  padding-left: 1rem;
+  border-radius: 3rem;
+
+  background-color: #fff;
+}
+.login-form > button {
+  width: 28.6rem;
+  height: 3.8rem;
+  border-radius: 3rem;
+  background-color: #c9d6ff;
+  border-color: #4256ff;
+}
+.login-container > .sns-login {
+  flex-basis: 20%;
+  display: flex;
+  align-items: center;
+}
+.kakao {
+  border-radius: 1rem;
+  width: 8rem;
+  height: 3rem;
+  background-color: #ffffa8;
+  border-color: #fff176;
+}
+
+/* 회원가입 섹션 */
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 18rem;
+}
+.signin-container > button {
+  width: 13rem;
+  height: 3rem;
+  background-color: #ddd6f3;
+  border-color: #a939ff;
+  border-radius: 3rem;
+}

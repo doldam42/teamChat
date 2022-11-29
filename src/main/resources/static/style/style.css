@@ -1,0 +1,18 @@
+html,
+body {
+  font-size: 62.5%;
+  line-height: 1.285;
+}
+body {
+  background-color: #e9e4f0;
+}
+h1 {
+  font-size: 8em;
+  font-family: "Courier New", Courier, monospace;
+}
+p {
+  font-size: 1.5rem;
+}
+hr {
+  width: 40rem;
+}

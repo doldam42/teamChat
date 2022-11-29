@@ -1,0 +1,56 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* 타이틀 */
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+}
+.title-container > img {
+  height: 12rem;
+  margin: 1.5rem;
+}
+.title-container > h1 {
+  margin: 1.5rem;
+}
+
+.signin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 40rem;
+}
+
+.signin-container > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-container input {
+  width: 27.6rem;
+  height: 2.8rem;
+  border: thin solid black;
+  padding-left: 1rem;
+  border-radius: 3rem;
+
+  background-color: #fff;
+}
+.signin-container label {
+  font-size: medium;
+}
+.signin-container > button {
+  width: 27.6rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background-color: #ddd6f3;
+  border-color: #a939ff;
+}
+
+form.was-validated input:invalid {
+  border-color: red;
+}

@@ -49,7 +49,6 @@ public class RoomService {
 
     /**
      * 메모리에 방이 존재하지 않지만 데이터베이스 상에 존재할 경우 chatRoom 생성
-     * @param roomId
      */
     public RoomDTO enter(String roomId) {
         Optional<RoomDTO> op1 = findActiveRoomById(roomId);

@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @ToString
 @Entity
-@Table(name = "Room")
+@Table(name = "room")
 public class Room {
     @Id
     private String roomId;
