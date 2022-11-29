@@ -5,14 +5,14 @@
     <title>Home</title>
 </head>
 <body>
-<h1 th:text="'안녕하세요! '+ ${username}">안녕하세요 손님</h1>
-<form action="/room" method="post" id="room-form">
+<h1 th:text="'안녕하세요! '+ ${nick}">안녕하세요 손님</h1>
+<form th:action="@{/room}" method="post" id="room-form">
     <label for="title">채팅방 생성</label>
     <input type="text" name="title" id="title" placeholder="방제를 입력하세요" />
     <button type="submit">확인</button>
 </form>
 <br>
-<form action="/auth/logout" method="get">
+<form th:action="@{/auth/logout}" method="get">
     <button type="submit">로그아웃</button>
 </form>
 <h1 id="roomId">

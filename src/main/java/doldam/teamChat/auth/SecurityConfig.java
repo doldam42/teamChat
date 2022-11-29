@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/main", true)
                         .failureUrl("/login/?error"))
                 .userDetailsService(userDetailsService)
+                .csrf().disable()
                 .logout(logout -> logout
                         .logoutUrl("/auth/logout")
                         .logoutSuccessUrl("/auth/login?logout")

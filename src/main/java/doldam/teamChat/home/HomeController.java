@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping("/main")
     public String main(Model model, @AuthenticationPrincipal MyUserDetails customUser) {
-        model.addAttribute("username", customUser.getUsername());
+        model.addAttribute("nick", customUser.getNick());
         return "home";
     }
 }
